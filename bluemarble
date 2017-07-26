@@ -1,0 +1,349 @@
+
+#include<stdio.h>
+#include<string.h>
+#define PENSION "㉬"
+#define BUILDING "㉥"
+#define HOTEL "㉭"
+
+typedef struct city {
+	char city_name[9];	//도시 이름
+	int owner;			//땅주인
+	int pension;		//팬션 유무
+	int building;		//빌딩 유무
+	int hotel;			//호텔 유무
+	int landmark;		//랜드마크 유무
+	int toll;			//통행료
+	int land_price;		//땅값
+	int pension_price;	//팬션 건설비
+	int building_price; //빌딩 건설비
+	int hotel_price;	//호텔 건설비
+	int landmark_price; //랜드마크 건설비
+
+}city;
+
+void print_UI()
+{
+	/*
+	모서리→ 상파울루 → 시드니 → 븟산 → 하와이 → 마드리드 → 모서리
+	↑															   ↓
+	베를린														  파리
+	↑															   ↓
+	취리히														  로마
+	↑															   ↓
+	스톡홀름													  런던
+	↑															   ↓
+	코펜하겐													  뉴욕
+	↑ 															   ↓
+	아테네														  서울
+	↑															   ↓
+	모서리 ← 싱가포르 ← 제주도 ← 마닐라 ← 홍콩 ← 타이페이 ← 모서리
+	*/
+	/*☆☆☆팬션㉬, 빌딩㉥, 호텔㉭, 랜드마크㉣*/
+
+	printf("┌────┬────┬────┬────┬────┬────┬────┐\n");
+	printf("│모서리임│상파울루│ 시드니 │  부산  │ 하와이 │마드리드│모서리임│\n");
+	printf("│X X X X │        │        │        │        │        │        │\n");
+	printf("├────┼────┴────┴────┴────┴────┼────┤\n");
+	printf("│ 베를린 │                                                │  파리  │\n");
+	printf("│        │                                                │        │\n");
+	printf("├────┤                                                ├────┤\n");
+	printf("│ 취리히 │                                                │  로마  │\n");
+	printf("│        │                                                │        │\n");
+	printf("├────┤                                                ├────┤\n");
+	printf("│스톡홀름│                                                │  런던  │\n");
+	printf("│        │                                                │        │\n");
+	printf("├────┤                                                ├────┤\n");
+	printf("│코펜하겐│                                                │  뉴욕  │\n");
+	printf("│        │                                                │        │\n");
+	printf("├────┤                                                ├────┤\n");
+	printf("│ 아테네 │                                                │  서울  │\n");
+	printf("│        │                                                │        │\n");
+	printf("├────┼────┬────┬────┬────┬────┼────┤\n");
+	printf("│모서리임│싱가포르│ 제주도 │ 마닐라 │  홍콩  │타이페이│모서리임│\n");
+	printf("│        │        │        │        │        │        │        │\n");
+	printf("└────┴────┴────┴────┴────┴────┴────┘\n");
+}
+
+void __init(city *m_city)
+{
+	//타이페이 설정
+	strcpy(m_city[0].city_name,"타이페이");
+	m_city[0].owner = 0;
+	m_city[0].pension = 0;
+	m_city[0].building = 0;
+	m_city[0].hotel = 0;
+	m_city[0].landmark = 0;
+	m_city[0].toll = 3;
+	m_city[0].land_price = 6;
+	m_city[0].pension_price = 4;
+	m_city[0].building_price = 8;
+	m_city[0].hotel_price = 12;
+	m_city[0].landmark_price = 24;
+	//홍콩 설정
+	strcpy(m_city[1].city_name, "홍콩");
+	m_city[1].owner = 0;
+	m_city[1].pension = 0;
+	m_city[1].building = 0;
+	m_city[1].hotel = 0;
+	m_city[1].landmark = 0;
+	m_city[1].toll = 4;
+	m_city[1].land_price = 8;
+	m_city[1].pension_price = 6;
+	m_city[1].building_price = 12;
+	m_city[1].hotel_price = 16;
+	m_city[1].landmark_price = 32;
+	//마닐라 설정
+	strcpy(m_city[2].city_name, "마닐라");
+	m_city[2].owner = 0;
+	m_city[2].pension = 0;
+	m_city[2].building = 0;
+	m_city[2].hotel = 0;
+	m_city[2].landmark = 0;
+	m_city[2].toll = 4;
+	m_city[2].land_price = 8;
+	m_city[2].pension_price = 6;
+	m_city[2].building_price = 12;
+	m_city[2].hotel_price = 16;
+	m_city[2].landmark_price = 32;
+	//제주도 설정
+	strcpy(m_city[3].city_name, "제주도");
+	m_city[3].owner = 0;
+	m_city[3].pension = 0;
+	m_city[3].building = 0;
+	m_city[3].hotel = 0;
+	m_city[3].landmark = 0;
+	m_city[3].toll = 10;
+	m_city[3].land_price = 20;
+	m_city[3].pension_price = 14;
+	m_city[3].building_price = 28;
+	m_city[3].hotel_price = 40;
+	m_city[3].landmark_price = 80;
+	//싱가포르 설정
+	strcpy(m_city[4].city_name, "싱가포르");
+	m_city[4].owner = 0;
+	m_city[4].pension = 0;
+	m_city[4].building = 0;
+	m_city[4].hotel = 0;
+	m_city[4].landmark = 0;
+	m_city[4].toll = 5;
+	m_city[4].land_price = 10;
+	m_city[4].pension_price = 6;
+	m_city[4].building_price = 12;
+	m_city[4].hotel_price = 20;
+	m_city[4].landmark_price = 40;
+	//아테네 설정
+	strcpy(m_city[5].city_name, "아테네");
+	m_city[5].owner = 0;
+	m_city[5].pension = 0;
+	m_city[5].building = 0;
+	m_city[5].hotel = 0;
+	m_city[5].landmark = 0;
+	m_city[5].toll = 7;
+	m_city[5].land_price = 14;
+	m_city[5].pension_price = 10;
+	m_city[5].building_price = 20;
+	m_city[5].hotel_price = 28;
+	m_city[5].landmark_price = 56;
+	//코펜하겐
+	strcpy(m_city[6].city_name, "코펜하겐");
+	m_city[6].owner = 0;
+	m_city[6].pension = 0;
+	m_city[6].building = 0;
+	m_city[6].hotel = 0;
+	m_city[6].landmark = 0;
+	m_city[6].toll = 8;
+	m_city[6].land_price = 16;
+	m_city[6].pension_price = 10;
+	m_city[6].building_price = 20;
+	m_city[6].hotel_price = 32;
+	m_city[6].landmark_price = 64;
+	//스톡홀름
+	strcpy(m_city[7].city_name, "스톡홀름");
+	m_city[7].owner = 0;
+	m_city[7].pension = 0;
+	m_city[7].building = 0;
+	m_city[7].hotel = 0;
+	m_city[7].landmark = 0;
+	m_city[7].toll = 8;
+	m_city[7].land_price = 16;
+	m_city[7].pension_price = 10;
+	m_city[7].building_price = 20;
+	m_city[7].hotel_price = 32;
+	m_city[7].landmark_price = 64;
+
+	//취리히
+	strcpy(m_city[8].city_name, "취리히");
+	m_city[8].owner = 0;
+	m_city[8].pension = 0;
+	m_city[8].building = 0;
+	m_city[8].hotel = 0;
+	m_city[8].landmark = 0;
+	m_city[8].toll = 9;
+	m_city[8].land_price = 18;
+	m_city[8].pension_price = 12;
+	m_city[8].building_price = 24;
+	m_city[8].hotel_price = 36;
+	m_city[8].landmark_price = 72;
+	//베를린
+	strcpy(m_city[9].city_name, "베를린");
+	m_city[9].owner = 0;
+	m_city[9].pension = 0;
+	m_city[9].building = 0;
+	m_city[9].hotel = 0;
+	m_city[9].landmark = 0;
+	m_city[9].toll = 9;
+	m_city[9].land_price = 18;
+	m_city[9].pension_price = 12;
+	m_city[9].building_price = 24;
+	m_city[9].hotel_price = 36;
+	m_city[9].landmark_price = 72;
+	//상파울루
+	strcpy(m_city[10].city_name, "상파울루");
+	m_city[10].owner = 0;
+	m_city[10].pension = 0;
+	m_city[10].building = 0;
+	m_city[10].hotel = 0;
+	m_city[10].landmark = 0;
+	m_city[10].toll = 12;
+	m_city[10].land_price = 24;
+	m_city[10].pension_price = 16;
+	m_city[10].building_price = 32;
+	m_city[10].hotel_price = 48;
+	m_city[10].landmark_price = 96;
+	//시드니
+	strcpy(m_city[11].city_name, "시드니");
+	m_city[11].owner = 0;
+	m_city[11].pension = 0;
+	m_city[11].building = 0;
+	m_city[11].hotel = 0;
+	m_city[11].landmark = 0;
+	m_city[11].toll = 12;
+	m_city[11].land_price = 24;
+	m_city[11].pension_price = 16;
+	m_city[11].building_price = 32;
+	m_city[11].hotel_price = 48;
+	m_city[11].landmark_price = 96;
+	//부산
+	strcpy(m_city[12].city_name, "부산");
+	m_city[12].owner = 0;
+	m_city[12].pension = 0;
+	m_city[12].building = 0;
+	m_city[12].hotel = 0;
+	m_city[12].landmark = 0;
+	m_city[12].toll = 25;
+	m_city[12].land_price = 50;
+	m_city[12].pension_price = 34;
+	m_city[12].building_price = 68;
+	m_city[12].hotel_price = 100;
+	m_city[12].landmark_price = 200;
+
+	/*하와이*/
+	strcpy(m_city[13].city_name, "하와이");
+	m_city[13].owner = 0;
+	m_city[13].pension = 0;
+	m_city[13].building = 0;
+	m_city[13].hotel = 0;
+	m_city[13].landmark = 0;
+	m_city[13].toll = 13;
+	m_city[13].land_price = 26;
+	m_city[13].pension_price = 18;
+	m_city[13].building_price = 36;
+	m_city[13].hotel_price = 52;
+	m_city[13].landmark_price = 104;
+
+	/*마드리드*/
+	strcpy(m_city[14].city_name, "마드리드");
+	m_city[14].owner = 0;
+	m_city[14].pension = 0;
+	m_city[14].building = 0;
+	m_city[14].hotel = 0;
+	m_city[14].landmark = 0;
+	m_city[14].toll = 14;
+	m_city[14].land_price = 28;
+	m_city[14].pension_price = 18;
+	m_city[14].building_price = 36;
+	m_city[14].hotel_price = 56;
+	m_city[14].landmark_price = 112;
+
+	/*파리*/
+	strcpy(m_city[15].city_name, "파리");
+	m_city[15].owner = 0;
+	m_city[15].pension = 0;
+	m_city[15].building = 0;
+	m_city[15].hotel = 0;
+	m_city[15].landmark = 0;
+	m_city[15].toll = 16;
+	m_city[15].land_price = 32;
+	m_city[15].pension_price = 22;
+	m_city[15].building_price = 44;
+	m_city[15].hotel_price = 64;
+	m_city[15].landmark_price = 128;
+
+	/*로마*/
+	strcpy(m_city[16].city_name, "로마");
+	m_city[16].owner = 0;
+	m_city[16].pension = 0;
+	m_city[16].building = 0;
+	m_city[16].hotel = 0;
+	m_city[16].landmark = 0;
+	m_city[16].toll = 16;
+	m_city[16].land_price = 32;
+	m_city[16].pension_price = 22;
+	m_city[16].building_price = 44;
+	m_city[16].hotel_price = 64;
+	m_city[16].landmark_price = 128;
+
+	/*런던*/
+	strcpy(m_city[17].city_name, "런던");
+	m_city[17].owner = 0;
+	m_city[17].pension = 0;
+	m_city[17].building = 0;
+	m_city[17].hotel = 0;
+	m_city[17].landmark = 0;
+	m_city[17].toll = 16;
+	m_city[17].land_price = 32;
+	m_city[17].pension_price = 22;
+	m_city[17].building_price = 44;
+	m_city[17].hotel_price = 64;
+	m_city[17].landmark_price = 128;
+
+	/*뉴욕*/
+	strcpy(m_city[18].city_name, "뉴욕");
+	m_city[18].owner = 0;
+	m_city[18].pension = 0;
+	m_city[18].building = 0;
+	m_city[18].hotel = 0;
+	m_city[18].landmark = 0;
+	m_city[18].toll = 18;
+	m_city[18].land_price = 36;
+	m_city[18].pension_price = 24;
+	m_city[18].building_price = 48;
+	m_city[18].hotel_price = 72;
+	m_city[18].landmark_price = 144;
+
+	/*서울*/
+	strcpy(m_city[19].city_name, "서울");
+	m_city[19].owner = 0;
+	m_city[19].pension = 0;
+	m_city[19].building = 0;
+	m_city[19].hotel = 0;
+	m_city[19].landmark = 0;
+	m_city[19].toll = 50;
+	m_city[19].land_price = 100;
+	m_city[19].pension_price = 66;
+	m_city[19].building_price = 132;
+	m_city[19].hotel_price = 200;
+	m_city[19].landmark_price = 400;
+}
+
+int main()
+{
+	city m_city[20];
+	int i;
+	__init(&m_city);
+	for (i = 0; i < 20; i++)
+	{
+		printf("%d\n",m_city[i].land_price);
+	}
+	return 0;
+}
