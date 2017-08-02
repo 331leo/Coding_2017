@@ -1,10 +1,13 @@
-
+#include <Windows.h>
 #include<stdio.h>
 #include<string.h>
 #define PENSION "㉬"
 #define BUILDING "㉥"
 #define HOTEL "㉭"
-
+#define PLAYER1 "①"
+#define PLAYER2 "②"
+#define PLAYER3 "③"
+#define PLAYER4 "④"
 typedef struct city {
 	char city_name[9];	//도시 이름
 	int owner;			//땅주인
@@ -21,7 +24,67 @@ typedef struct city {
 
 }city;
 
-void print_UI()
+int main_menu()
+{
+	int user_count;
+	char yn;
+	printf("플레이할 유저수를 입력하세요(2~4)_____\b\b\b");
+	scanf("%d", &user_count);
+	getchar();
+	printf("%d명 이 플레이합니까?(Y,N)  ", user_count);
+	scanf("%c", &yn);
+	if (yn == 'n' || yn == 'N') 
+		main_menu();
+	printf("튜토리얼을 시작할까요?*필수아님*(Y,N)");
+	getchar();
+	scanf("%c", &yn);
+	printf("그럼 게임을 시작하지(5)\n");
+	Sleep(1000);
+	printf("그럼 게임을 시작하지(4)\n");
+	Sleep(1000);
+	printf("그럼 게임을 시작하지(3)\n");
+	Sleep(1000);
+	printf("그럼 게임을 시작하지(2)\n");
+	Sleep(1000);
+	printf("그럼 게임을 시작하지(1)\n");
+	Sleep(1000);
+	system("cls");
+	if (yn == 'Y' || yn == 'y') tutorial();
+	else main_game();
+}
+int tutorial()
+{
+	printf("튜토리얼 모드입니다\n");
+	printf("이 %s %s %s %s 가 각각 플레이어 1,2,3,4를 나타냅니다. \n",PLAYER1,PLAYER2,PLAYER3,PLAYER4);
+	system("pause");
+	printf("컴퓨터가 랜덤으로 만든 수 만큼 앞으로 갈수 있습니다. \n");
+	system("pause");
+	printf("도착한 땅이 주인이 없는 땅이라면 돈을 주고 땅문서를 가지고 건물을 지을수 있습니다. \n");
+	system("pause");
+	printf("도착한 땅이 주인이 있는 땅이라면 통행료를 내야합니다.  \n");
+	system("pause");
+	printf("땅주인이 없을 때 사기 싫다면 안 사도 됩니다.   \n");
+	system("pause");
+	printf("별장, 빌딩, 호텔의 건설비는 그 땅에 도착하면 컴퓨터의 화면에 뜨게 됩니다.  \n");
+	system("pause");
+	printf("통행료는 건물을 지을때마다 가격이 올라갑니다. \n");
+	system("pause");
+	printf("지불할 돈이 없을 경우: \n");
+	printf("1) 은행에서 2백만원까지 대출이 가능합니다. \n");
+	printf("2) 자신이 가지고 있는 땅 중에 '가장 비싼 땅'부터 팔 수 있습니다. \n");
+	system("pause");
+	printf("무인도 칸에 도착했을 경우: \n ");
+	printf("1) 3회를 쉴수 있습니다. \n");
+	printf("2) 30만. \n");
+	system("pause");
+	printf("모든사람의 돈 합은 976만원: \n");
+	main_game();
+}
+int main_game()
+{
+	print_UI();
+}
+int print_UI()
 {
 	/*
 	모서리→ 상파울루 → 시드니 → 븟산 → 하와이 → 마드리드 → 모서리
@@ -67,7 +130,7 @@ void print_UI()
 void __init(city *m_city)
 {
 	//타이페이 설정
-	strcpy(m_city[0].city_name,"타이페이");
+	strcpy(m_city[0].city_name, "타이페이");
 	m_city[0].owner = 0;
 	m_city[0].pension = 0;
 	m_city[0].building = 0;
@@ -338,12 +401,11 @@ void __init(city *m_city)
 
 int main()
 {
+	system("title 블루마블 PC게임 (인원제한용) BETA 0.0.1 BUILD");
 	city m_city[20];
 	int i;
 	__init(&m_city);
-	for (i = 0; i < 20; i++)
-	{
-		printf("%d\n",m_city[i].land_price);
-	}
+	main_menu();
+	
 	return 0;
 }
